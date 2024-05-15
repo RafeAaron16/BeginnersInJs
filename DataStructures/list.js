@@ -45,7 +45,7 @@ class SingleLinkedList{
         }
 
         else{
-            var currentNode = this.firstNode
+            var currentNode = this.firstNode;
 
             while(currentNode.pointer != null){
                 currentNode = currentNode.pointer
@@ -124,4 +124,120 @@ class SingleLinkedList{
     }
 }
 
-module.exports = {SingleLinkedList}
+class Array{
+
+    firstNode = null;
+    length = 0;
+
+    add(node){
+        if(this.firstNode == null){
+            this.firstNode = node;
+        }
+
+        else{
+            var currentNode = this.firstNode
+
+            while(currentNode.pointer != null){
+                currentNode = currentNode.pointer
+            }
+
+            currentNode.pointer = node
+        }
+
+        this.length++;
+    }
+
+    delete(node){
+        //Deleting an element at the beginning
+        if(this.firstNode.value == node.value){
+
+            //If the first value doesn't point to anything
+            if(this.firstNode.pointer == null){
+                this.firstNode = null;
+            }
+            else{
+                intermediate = this.firstNode.pointer
+                this.firstNode.pointer = null;
+                this.firstNode = intermediate;
+            }
+
+            this.length--;
+            return
+        }
+        else{
+            var currentNode = this.firstNode;
+
+            while(currentNode.pointer.value != node.value && currentNode.pointer.pointer != null){
+                currentNode = currentNode.pointer;
+            }
+
+            if(currentNode.pointer == null){
+                console.log("The element doesn't exist in the list")
+                return false;
+            }
+
+            if(currentNode.pointer.value == node.value){
+                currentNode.pointer = currentNode.pointer.pointer
+            }
+        }
+
+        this.length--;
+    }
+
+    search(node){
+        
+        var currentNode = this.firstNode;
+
+        while(currentNode.value != node.value && currentNode.pointer != null){
+            currentNode = currentNode.pointer
+        }
+
+        if(currentNode.value == node.value){
+            console.log("Node found")
+            return currentNode
+        }
+        else{
+            console.log("Node not found")
+            return null;
+        }
+    }
+
+    getElementAtIndex(number){
+        if(number >= this.length){
+            console.log("Index provided is out of range");
+            return -1
+        }else{
+
+            var position = 0;
+            var currentNode = this.firstNode;
+
+            while(position < number){
+                currentNode = currentNode.pointer;
+                position++;
+            }
+
+            console.log(currentNode.value)
+            return currentNode;
+        }
+    }
+
+    showNodes(){
+        var mylist = "";
+        
+        var currentNode = this.firstNode;
+
+        if(currentNode == null){
+            console.log("The list is empty");
+            return
+        }
+
+        while(currentNode != null){
+            mylist += currentNode.value + " -> ";
+            currentNode = currentNode.pointer;
+        }
+
+        console.log(mylist);
+    }
+}
+
+module.exports = {SingleLinkedList, Array}
