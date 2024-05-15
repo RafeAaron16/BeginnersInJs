@@ -45,7 +45,7 @@ class SingleLinkedList{
         }
 
         else{
-            currentNode = this.firstNode
+            var currentNode = this.firstNode
 
             while(currentNode.pointer != null){
                 currentNode = currentNode.pointer
@@ -70,7 +70,7 @@ class SingleLinkedList{
             }
         }
         else{
-            currentNode = this.firstNode;
+            var currentNode = this.firstNode;
 
             while(currentNode.pointer.value != node.value && currentNode.pointer.pointer != null){
                 currentNode = currentNode.pointer;
@@ -86,4 +86,42 @@ class SingleLinkedList{
             }
         }
     }
+
+    search(node){
+        
+        var currentNode = this.firstNode;
+
+        while(currentNode.value != node.value && currentNode.pointer != null){
+            currentNode = currentNode.pointer
+        }
+
+        if(currentNode.value == node.value){
+            console.log("Node found")
+            return currentNode
+        }
+        else{
+            console.log("Node not found")
+            return null;
+        }
+    }
+
+    showNodes(){
+        var mylist = "";
+        
+        var currentNode = this.firstNode;
+
+        if(currentNode == null){
+            console.log("The list is empty");
+            return
+        }
+
+        while(currentNode != null){
+            mylist += currentNode.value + " -> ";
+            currentNode = currentNode.pointer;
+        }
+
+        console.log(mylist);
+    }
 }
+
+module.exports = {SingleLinkedList}
